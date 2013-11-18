@@ -1,0 +1,99 @@
+# Syntax for getting all txns in a release stream (or any other, but this is
+# specifically the small set that we want to focus on). One really nice thing
+# about this is it does not depend on a workspace, and therefore it not bound
+# to a specific location on disk.
+
+D:\SbProjects\BrokerageWebSite>ar hist -s BrokerageWebSite_13.11.020 -a
+
+####
+
+# To make the history command more suitable for programmatic parsing, add -fx:
+
+D:\temp\accurev_txn_report>ar hist -s BrokerageWebSite_13.11.020 -a -fx
+
+####
+
+Current Status
+
+Displaying dictionary with key=txn ID, value=[author, comment], when txn type
+is "promote".
+
+####
+
+Next Steps - Paper Mockup
+
+(done)
+
+####
+
+Mockup turned up a few useful bits. Here are the main pieces to go after for
+now:
+
+  <transaction              # txn
+      id="61224"            # txn attr: id
+      type="promote"        # txn attr: type
+      user="knaylor">       # txn attr: user
+    <comment>Sprint 13.10B : B-80877 : Add Research Alerts to Alerts Module</comment>                       # txn element: comment
+    <version                # txn element: version
+        path="\.\Source\ShareBuilder.Brokerage.Web.WebSite\ShareBuilder.Brokerage.Web.WebSite.csproj" />        # version attr: path
+    <version                # txn element: version
+        path="\.\Source\ShareBuilder.Brokerage.Web.WebSite\ShareBuilder\Account\Workflows\Overview\AccountOverview.ascx.cs" />  # version attr: path
+  </transaction>
+
+
+# Question: Should I create a generic (immediate rection: red flag) tool to
+# pull values on-demand, or populate a data structure with just the pieces I
+# want?
+#
+# Answer: Start with the simplest thing that will work.
+#
+# Edit 1: Turns out that the simplest thing that will work is to pull the
+# values on-demand. I'll need a stream name to get the data. The transactions
+# are recorded with a realNamedVersion. I'm a little concerned that some
+# transactions from child streams will not show up in the txnreport, but I
+# think that's mostly me not having a perfectly clear understanding. It looks
+# like my concern is unfounded.
+#
+#   [[Aside: For whatever reason (probably straight ignorance) I thought I
+#   could fetch the history for BrokerageWebSite (root) and somehow have it
+#   magically include the transactions in it's child streams.  But until those
+#   changes are promoted up, and recorded as a virtualNamedVersion, they're
+#   only available in their own streams as a realNamedVersion.]]
+
+# Question: Do I expect to maintain this thing, or get it to the point where
+# it's ready to be redone in C#/.NET?
+#
+# Answer: Redoing it in C# would be nice, but it's by no means guaranteed to
+# happen, especially if what I eventually write is "good enough".
+
+####
+
+Next Steps - Get the Data
+
+(done)
+
+####
+
+Next Steps - Translate XML Elements and Attributes Into a Dictionary
+
+The txn ID is unique (as far as I know) across depots, so it can be used as a
+key if need be.
+
+Also want a header explaining what stream and release this data is pulled
+from. That may have to be bolted on from elsewhere.
+
+Would be nice to sort by txn ID, which (strictly) implies chronological order
+as well.
+
+####
+
+Next Steps - Screw the Dictionary: Use a Class Instead
+
+A dict would work, except we'll need a list of dicts. And then we'd need an
+embedded list within each dict to hold the list of source file paths. The end
+result is a list of dicts of lists. Screw everything about that. A class isn't
+the perfect solution, but it's more elegant than the former alternative.
+
+####
+
+
