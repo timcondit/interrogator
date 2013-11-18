@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" >
+    <head>
+        <title>Transaction details for $project_$version</title>
+        <link
+        href="static/foundation-4.3.2/css/foundation.css"
+        type="text/css"
+        rel="stylesheet" />
+        <!--
+        <script src="static/jquery-2.0.3.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $("#toggle").click(function(){
+                    $("#para").toggle(1000);
+                });
+            });
+
+//            $( "#clickme" ).click(function() {
+//                $( "#book" ).toggle( "slow", function() {
+//                    // Animation complete.
+//                });
+//            });
+
+        </script>
+        -->
+
+        <script>
+            function toggleElement() {
+                if(document.getElementById('spoiler').style.display=='none') {
+                    document.getElementById('spoiler').style.display=''
+                }
+                else{
+                    document.getElementById('spoiler').style.display='none'
+                }
+        </script>
+    </head>
+
+    <body>
+        <h2>Transaction details for $project_$version</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th width="70">Txn ID</th>
+                    <th width="200">Date & Time</th>
+                    <th>Txn Type</th>
+                    <th width="70">User</th>
+                    <th width="400">Comment</th>
+                    <th>Source File Paths<br />
+                        <button id="toggle" value="Show/hide files"
+                            text="button" />
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>61226</td>
+                    <td>Fri Nov 08 15:27:47 2013</td>
+                    <td>promote</td>
+                    <td>knaylor</td>
+                    <td>Sprint 13.11B : B-200594 IOS7 Mobile Safari Compatibility Issue
+                        added new os setting iphoneos (to differentiate from ipados)</td>
+                    <td>
+
+<button title="Click to show/hide content" type="button" onclick="
+    if(document.getElementById('spoiler').style.display=='none') {
+        document.getElementById('spoiler').style.display=''
+    }
+    else{
+        document.getElementById('spoiler').style.display='none'
+    }">Show/hide</button>
+                        <div id="spoiler" style="display:none">
+                                \.\Dependencies\Debug\ShareBuilder.Web.UI.dll<br />
+                                \.\Dependencies\Release\ShareBuilder.Web.UI.dll<br />
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>61226</td>
+                    <td>Fri Nov 08 15:27:47 2013</td>
+                    <td>promote</td>
+                    <td>knaylor</td>
+                    <td>Sprint 13.11B : B-200594 IOS7 Mobile Safari Compatibility Issue
+                        added new os setting iphoneos (to differentiate from ipados)</td>
+                    <td>
+                        <button
+                            title="Click to show/hide content"
+                            value="Show/hide"
+                            onclick="toggleElement()">Show/Hide
+                        </button>
+
+                        <div id="spoiler" style="display:none">
+                            \.\Dependencies\Debug\ShareBuilder.Web.UI.dll<br />
+                            \.\Dependencies\Release\ShareBuilder.Web.UI.dll<br />
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </body>
+</html>
+
